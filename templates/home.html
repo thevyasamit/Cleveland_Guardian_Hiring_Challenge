@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="icon" href="data:,">
+    <meta charset="utf-8">
+    <title>Select Option</title>
+  </head>
+  <body>
+    <div class="login">
+      <h1>Enter Employee ID or Department Name!</h1>
+      <form action="{{ url_for('home') }}" method="post">
+        <input type="text" name="empid" placeholder="Employee ID here" id="empid"><br>
+        <input type="text" name="dept" placeholder="Department Name here" id="dept" ><br>
+        <input type="submit" value="Submit">
+      </form>
+       {{msg}}
+        <div>
+      {% for i in data %}
+      <br>
+      <br> 
+        <p> Request Id: {{i.request_id}}</p>
+        <p> Employee Id: {{i.employee_id}}</p>
+        <p> Request Approved: {{i.isApproved}}</p>
+        <p> Number of Tickets: {{i.number_of_tickets}}</p>
+        <p> Requested Date: {{i.date_requested}}</p>
+        <p> {% if i.entry_time == "" %}</p>
+              Present at the event : NOT PRESENT!!!
+            {% else %}
+              Present at the event : YES
+            <p> Entry Time: {{i.entry_time}}</p>
+            {% endif %}
+      {% endfor %}
+    </div>
+    </div>
+  </body>
+</html>

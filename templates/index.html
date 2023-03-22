@@ -1,0 +1,132 @@
+<html>
+  <head>
+    <title>Employee Ticket Request</title>
+  </head>
+  <body>
+    <h1>Employee Ticket Request</h1>
+    <div>
+      {% for i in data %}
+      <br>
+      <br> 
+        <p> Request Id: {{i.request_id}}</p>
+        <p> Employee Id: {{i.employee_id}}</p>
+        <p> Request Approved: {{i.isApproved}}</p>
+        <p> Number of Tickets: {{i.number_of_tickets}}</p>
+        <p> Requested Date: {{i.date_requested}}</p>
+        <p> {% if i.entry_time == "" %}</p>
+              Present at the event : NOT PRESENT!!!
+            {% else %}
+              Present at the event : YES
+            <p> Entry Time: {{i.entry_time}}</p>
+            {% endif %}
+      {% endfor %}
+    </div>
+  </body>
+</html>
+
+
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JSON Test</title>
+</head>
+<body>
+    <div id="myData"></div>
+    <script>
+        fetch('Employees.json')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                appendData(data);
+            })
+            .catch(function (err) {
+                console.log('error: ' + err);
+            });
+        function appendData(data) {
+            var mainContainer = document.getElementById("myData");
+            for (var i = 0; i < data.length; i++) {
+                var div = document.createElement("div");
+                div.innerHTML = 'Name: ' + data[i].name+ '-------' + data[i].department;
+                mainContainer.appendChild(div);
+            }
+        }
+    </script>
+</body>
+</html> -->
+
+
+
+
+<!-- <html>
+  <head>
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #dddddd;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Employee Ticket Request Information</h2>
+    <table id="ticketRequestTable">
+      <tr>
+        <th>Status</th>
+        <th>Number of Tickets</th>
+        <th>Date of Game Requested</th>
+        <th>Time Entered the Ballpark</th>
+        <th>Attended Game</th>
+      </tr>
+    </table>
+
+    <script>
+      // Fetch the data from the Employees JSON
+      fetch("Employees.json")
+        .then(response => response.json())
+        .then(employeeData => {
+          // Fetch the data from the Ticket Requests JSON
+          fetch("Requests.json")
+            .then(response => response.json())
+            .then(ticketRequestData => {
+              // Get the current employee's information
+              const currentEmployee = employeeData.find(
+                employee => employee.is_current_employee
+              );
+              const employeeId = currentEmployee.id;
+
+              // Find the ticket request for the current employee
+              const employeeTicketRequest = ticketRequestData.find(
+                ticketRequest => ticketRequest.employee_id === employeeId
+              );
+
+              // Populate the table with the employee's ticket request information
+              const table = document.getElementById("ticketRequestTable");
+              const row = table.insertRow();
+              row.insertCell().innerHTML = employeeTicketRequest.status;
+              row.insertCell().innerHTML = employeeTicketRequest.number_of_tickets;
+              row.insertCell().innerHTML = employeeTicketRequest.date_of_game;
+              row.insertCell().innerHTML = employeeTicketRequest.time_entered_ballpark;
+              row.insertCell().innerHTML = employeeTicketRequest.attended_game
+                ? "Yes"
+                : "No";
+            });
+        });
+    </script>
+  </body>
+</html>
+ -->
